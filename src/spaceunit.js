@@ -21,3 +21,11 @@ class SpaceUnit extends HTMLElement {
 }
 
 customElements.define('spaceunit', SpaceUnit);
+
+window.customCards = window.customCards || [];
+window.customCards.push({
+  type: "spaceunit",
+  name: "SpaceUnit Card",
+  preview: true,
+  description: "Eine minimalistische Karte zur Anzeige von Raumtemperatur."
+});
