@@ -1,8 +1,8 @@
 
 {
   "name": "spaceunit",
-  "version": "1.0.1",
-  "description": "Custom Room Card for Home Assistant",
+  "version": "1.0.6",
+  "description": "Minimal UI Card for Home Assistant",
   "scripts": {
     "build": "rollup -c"
   },
