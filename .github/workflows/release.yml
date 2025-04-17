@@ -1,4 +1,3 @@
-
 name: Build & Release
 
 on:
@@ -8,15 +7,27 @@ on:
 
 permissions:
   contents: write
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm install
-      - run: npm run build
-      - uses: softprops/action-gh-release@v1
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          files: dist/spaceunit.js
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Card
+        run: npm run build
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/spaceunit-card.js
