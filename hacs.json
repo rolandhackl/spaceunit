@@ -2,7 +2,7 @@
 {
   "name": "SpaceUnit",
   "content_in_root": false,
-  "filename": "spaceunit.js",
+  "filename": "spaceunit-card.js",
   "render_readme": true,
   "domains": ["lovelace"],
   "country": "DE"

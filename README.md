@@ -1,18 +1,19 @@
 
-# 🌌 SpaceUnit
+# 🌌 SpaceUnit Card
 
-**Minimalistische Custom Card für Home Assistant**
+**Kompakte Custom Card für Home Assistant**
 
-## 🚀 Features
-
-- Temperaturanzeige mit `temp_entity`
-- Minimal UI
-- HACS-kompatibel
-
-## 📦 Konfiguration
+## ⚙️ Konfiguration
 
 ```yaml
-type: custom:spaceunit
+type: custom:spaceunit-card
 title: Wohnzimmer
-temp_entity: sensor.outdoor_temperature
+temp_entity: sensor.temperature_livingroom
 ```
+
+## 🛠️ Installation (HACS)
+
+1. Repository zu HACS hinzufügen: `https://github.com/dein-user/spaceunit`
+2. Lovelace-Resource wird automatisch hinzugefügt:
+   `/hacsfiles/spaceunit/spaceunit-card.js`
+3. Danach: Dashboard → Karte manuell hinzufügen

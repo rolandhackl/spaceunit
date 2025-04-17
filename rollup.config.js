@@ -2,9 +2,9 @@
 import terser from "@rollup/plugin-terser";
 
 export default {
-  input: "src/spaceunit.js",
+  input: "src/spaceunit-card.js",
   output: {
-    file: "dist/spaceunit.js",
+    file: "dist/spaceunit-card.js",
     format: "esm"
   },
   treeshake: false,

@@ -1,8 +1,8 @@
 
 {
-  "name": "spaceunit",
-  "version": "1.0.6",
-  "description": "Minimal UI Card for Home Assistant",
+  "name": "spaceunit-card",
+  "version": "1.0.0",
+  "description": "SpaceUnit Card for Home Assistant",
   "scripts": {
     "build": "rollup -c"
   },
