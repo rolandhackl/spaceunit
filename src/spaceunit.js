@@ -22,10 +22,16 @@ class SpaceUnit extends HTMLElement {
 
 customElements.define('spaceunit', SpaceUnit);
 
+// Card Factory für Home Assistant
+function createCardElement() {
+  return document.createElement("spaceunit");
+}
+
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: "spaceunit",
   name: "SpaceUnit Card",
   preview: true,
-  description: "Eine minimalistische Karte zur Anzeige von Raumtemperatur."
+  description: "Minimalistische Temperaturanzeige",
+  load: createCardElement
 });
