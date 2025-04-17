@@ -1,13 +1,13 @@
 
 {
   "name": "spaceunit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Custom Room Card for Home Assistant",
   "scripts": {
     "build": "rollup -c"
   },
   "devDependencies": {
-    "rollup": "^3.0.0",
-    "rollup-plugin-terser": "^7.0.0"
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^3.29.4"
   }
 }
