@@ -1,0 +1,9 @@
+
+{
+  "name": "SpaceUnit",
+  "content_in_root": false,
+  "filename": "spaceunit.js",
+  "render_readme": true,
+  "domains": ["lovelace"],
+  "country": "DE"
+}
