@@ -1,4 +1,3 @@
-
 import terser from "@rollup/plugin-terser";
 
 export default {
@@ -7,5 +6,6 @@ export default {
     file: "dist/spaceunit.js",
     format: "esm"
   },
+  treeshake: false,
   plugins: [terser()]
 };
