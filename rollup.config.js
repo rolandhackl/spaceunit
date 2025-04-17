@@ -7,5 +7,5 @@ export default {
     format: "esm"
   },
   treeshake: false,
-  plugins: [terser()]
+  plugins: [terser({ keep_classnames: true })]
 };
