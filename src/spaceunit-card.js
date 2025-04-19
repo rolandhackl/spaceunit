@@ -1,10 +1,15 @@
 class SpaceUnitCard extends HTMLElement {
   setConfig(config) {
-    if (!config.temp_entity) {
-      throw new Error("temp_entity fehlt!");
-    }
-
+    if (!config.temp_entity) throw new Error("temp_entity fehlt!");
     this.config = config;
+
+    // 👇 Buttons vorab rendern
+    const buttons = (this.config.action_entities || [])
+      .map((a, i) => `
+        <ha-icon-button id="btn${i}" icon="${a.icon || 'mdi:help'}" style="opacity: 0.7;"></ha-icon-button>
+      `)
+      .join('');
+
     this.innerHTML = `
       <ha-card style="padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 120px; position: relative;">
         
@@ -16,11 +21,9 @@ class SpaceUnitCard extends HTMLElement {
           <div id="temps" style="font-size: 0.9em; opacity: 0.85;">-- °C | -- %</div>
         </div>
 
-        <!-- Button-Leiste rechts -->
+        <!-- Rechte Button-Leiste -->
         <div style="grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
-          ${(this.config.action_entities || []).map((a, i) => `
-            <ha-icon-button id="btn${i}" icon="${a.icon || 'mdi:help'}" style="opacity: 0.7;"></ha-icon-button>
-          `).join('')}
+          ${buttons}
         </div>
 
         <!-- Icon unten links -->
@@ -33,7 +36,6 @@ class SpaceUnitCard extends HTMLElement {
 
       </ha-card>
     `;
-
   }
 
   set hass(hass) {
@@ -44,8 +46,9 @@ class SpaceUnitCard extends HTMLElement {
     const status = hass.states[this.config.status_entity]?.state || '?';
     this.querySelector('#status-badge').textContent = status;
 
+    // 🔁 Button-Aktionen verbinden
     (this.config.action_entities || []).forEach((a, i) => {
-      const btn = this.querySelector('#btn' + i);
+      const btn = this.querySelector(`#btn${i}`);
       if (!btn) return;
       btn.addEventListener('click', () => {
         hass.callService(
