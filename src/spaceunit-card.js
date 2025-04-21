@@ -37,8 +37,8 @@ class SpaceUnitCard extends HTMLElement {
             <span id="status-badge" style="position: absolute; top: 4px; right: 4px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;">    
               <ha-icon icon="${this.config.badgeicon || 'mdi:home'}" style="--mdc-icon-size: 14px;"></ha-icon>   
             </span>
-            <span id="status-badge2" style="position: absolute; top: 8px; right: 8px; background:rgb(237, 10, 10); border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;">    
-              <ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 14px;"></ha-icon>   
+            <span style="position: absolute; top: top: 40px; left: 60px; background:rgb(237, 10, 10); border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;">    
+              <ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 14px;"></ha-icon>
             </span>
           </div>
         </div>
@@ -54,9 +54,6 @@ class SpaceUnitCard extends HTMLElement {
 
     const status = hass.states[this.config.status_entity]?.state || '?';
     this.querySelector('#status-badge').textContent = status;
-
-    const status2 = hass.states[this.config.status_entity2]?.state || '?';
-    this.querySelector('#status-badge2').textContent = status2;
 
     // 🔁 Button-Aktionen verbinden
     (this.config.action_entities || []).forEach((a, i) => {
