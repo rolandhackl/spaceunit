@@ -7,7 +7,7 @@ class SpaceUnitCard extends HTMLElement {
     const buttons = (this.config.action_entities || [])
       .map((a, i) => `
         <li style="list-style: none; display: flex; align-items: center; justify-content: center; background: #5c5c5c; border-radius: 50%; width: 30px; height: 30px; margin: 5px;">
-            <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 64px;"></ha-icon>
+            <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 24px;"></ha-icon>
         </li>
       `)
       .join('');
@@ -35,7 +35,7 @@ class SpaceUnitCard extends HTMLElement {
           <div style="position: absolute; left: -22px; top: 7px; width: 96px; height: 96px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
             <ha-icon icon="${this.config.icon || 'mdi:home'}" style="--mdc-icon-size: 64px;"></ha-icon>
             <span id="status-badge" style="position: absolute; top: 4px; right: 4px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;">    
-              <ha-icon icon="${this.config.badgeicon || 'mdi:home'}" style="--mdc-icon-size: 64px;"></ha-icon>   
+              <ha-icon icon="${this.config.badgeicon || 'mdi:home'}" style="--mdc-icon-size: 14px;"></ha-icon>   
             </span>
           </div>
         </div>
