@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpaceUnit Card Test</title>
+  <script type="module" src="spaceunit-card.js"></script>
+</head>
+<body>
+  <h1>SpaceUnit Card Test</h1>
+  <spaceunit-card></spaceunit-card>
+
+  <script>
+    // Simuliere Home Assistant-Daten
+    const mockHass = {
+      states: {
+        "sensor.temperature": { state: "22.5" },
+        "sensor.humidity": { state: "45" },
+        "sensor.status": { state: "on" }
+      },
+      callService(domain, service, data) {
+        console.log(`Service aufgerufen: ${domain}.${service}`, data);
+      }
+    };
+
+    // Konfiguriere die Karte
+    const card = document.querySelector("spaceunit-card");
+    card.setConfig({
+      title: "Testkarte",
+      icon: "mdi:thermometer",
+      temp_entity: "sensor.temperature",
+      humidity_entity: "sensor.humidity",
+      status_entity: "sensor.status",
+      action_entities: [
+        { entity: "light.living_room", icon: "mdi:lightbulb", tap_action: "toggle" }
+      ]
+    });
+
+    // Simuliere Home Assistant-Datenübergabe
+    card.hass = mockHass;
+  </script>
+</body>
+</html>

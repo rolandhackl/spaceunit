@@ -49,11 +49,11 @@ class SpaceUnitCard extends HTMLElement {
 
   set hass(hass) {
     // this.querySelector('#statustxt').textContent = `${this.config.statustxt}`;
-    const statustxt = hass.states[this.config.status_entity]?.state || "–";
+    const statustxt = hass.states[this.config.entity_temp]?.state + "°C" || "";
+    statustxt = statustxt + " | " || "";
+    statustxt = statustxt + hass.states[this.config.entity_humid]?.state + "%" || "";
     this.querySelector("#statustxt").textContent = statustxt;
 
-    const status = hass.states[this.config.status_entity]?.state || '?';
-    this.querySelector('#status-badge').textContent = status;
 
     // 🔁 Button-Aktionen verbinden
     (this.config.action_entities || []).forEach((a, i) => {
@@ -61,13 +61,14 @@ class SpaceUnitCard extends HTMLElement {
       if (!btn) return;
       btn.addEventListener('click', () => {
         hass.callService(
-          a.entity.split('.')[0],
-          a.tap_action || 'toggle',
-          { entity_id: a.entity }
+          entity_id.split(".")[0], // z.B. "light"
+          "toggle",
+          { entity_id }
         );
       });
     });
   }
+
 
   getCardSize() {
     return 2;
