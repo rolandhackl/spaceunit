@@ -49,7 +49,7 @@ class SpaceUnitCard extends HTMLElement {
 
   set hass(hass) {
     // this.querySelector('#statustxt').textContent = `${this.config.statustxt}`;
-    const statustxt = hass.states[this.config.entity_temp]?.state + "°C" || "";
+    var statustxt = hass.states[this.config.entity_temp]?.state + "°C" || "";
     statustxt = statustxt + " | " || "";
     statustxt = statustxt + hass.states[this.config.entity_humid]?.state + "%" || "";
     this.querySelector("#statustxt").textContent = statustxt;
