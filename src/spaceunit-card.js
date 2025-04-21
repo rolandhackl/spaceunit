@@ -13,7 +13,7 @@ class SpaceUnitCard extends HTMLElement {
       .join('');
 
     this.innerHTML = `
-      <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 120px; position: relative;">
+      <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative;">
         
         <!-- Titel oben links -->
         <div style="grid-column: 1; grid-row: 1; display: flex; flex-direction: column; justify-content: start;">
