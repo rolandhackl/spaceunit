@@ -6,14 +6,14 @@ class SpaceUnitCard extends HTMLElement {
     // 👇 Buttons vorab rendern
     const buttons = (this.config.action_entities || [])
       .map((a, i) => `
-        <div style="position: absolute; right:7px; top: 15px; width: 30px; height: 30px; border-radius: 50%;  background: #5c5c5c; display: flex; align-items: center; justify-content: center;">
+        <li style="list-style: none; display: flex; align-items: center; justify-content: center; background: #5c5c5c; border-radius: 50%; width: 30px; height: 30px; margin: 5px;">
             <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 64px;"></ha-icon>
-        </div>
+        </li>
       `)
       .join('');
 
     this.innerHTML = `
-      <ha-card style="padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 120px; position: relative;">
+      <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 120px; position: relative;">
         
         <!-- Titel oben links -->
         <div style="grid-column: 1; grid-row: 1; display: flex; flex-direction: column; justify-content: start;">
@@ -25,7 +25,9 @@ class SpaceUnitCard extends HTMLElement {
 
         <!-- Rechte Button-Leiste -->
         <div style="grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
-          ${buttons}
+          <ul>
+            ${buttons}
+          </ul>
         </div>
 
         <!-- Icon unten links -->
