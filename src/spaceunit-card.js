@@ -12,6 +12,13 @@ class SpaceUnitCard extends HTMLElement {
       `)
       .join('');
 
+
+    if(this.config.badgeicon) {
+      const badge1 = "<span id=\"status-badge\" style=\"position: absolute; top: 4px; right: 4px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;\"><ha-icon icon=\"${this.config.badgeicon || 'mdi:home'}\" style=\"--mdc-icon-size: 14px;\"></ha-icon></span>";
+    }
+    if(this.config.badgeicon2) {
+      const badge2 = "<span style=\"position: absolute; top: top: 40px; left: 90px; background:rgb(237, 10, 10); border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;\"><ha-icon icon=\"${this.config.badgeicon2 || 'mdi:home'}\" style=\"--mdc-icon-size: 14px;\"></ha-icon></span>";
+    }
     this.innerHTML = `
       <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative; opacity: 0.7;">
         
@@ -34,12 +41,8 @@ class SpaceUnitCard extends HTMLElement {
         <div style="grid-column: 1; grid-row: 2; position: relative;">
           <div style="position: absolute; left: -22px; top: 7px; width: 96px; height: 96px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
             <ha-icon icon="${this.config.icon || 'mdi:home'}" style="--mdc-icon-size: 64px;"></ha-icon>
-            <span id="status-badge" style="position: absolute; top: 4px; right: 4px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;">    
-              <ha-icon icon="${this.config.badgeicon || 'mdi:home'}" style="--mdc-icon-size: 14px;"></ha-icon>   
-            </span>
-            <span style="position: absolute; top: top: 40px; left: 90px; background:rgb(237, 10, 10); border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;">    
-              <ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 14px;"></ha-icon>
-            </span>
+            ${badge1}
+            ${badge2}
           </div>
         </div>
 
