@@ -1,6 +1,5 @@
 class SpaceUnitCard extends HTMLElement {
   setConfig(config) {
-    if (!config.temp_entity) throw new Error("temp_entity fehlt!");
     this.config = config;
 
     // 👇 Buttons vorab rendern
@@ -28,7 +27,7 @@ class SpaceUnitCard extends HTMLElement {
           <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 4px;">
             ${this.config.title || 'SpaceUnit'}
           </div>
-          <div id="statustxt" style="font-size: 0.9em; opacity: 0.75;">-- °C | -- %</div>
+          <div id="statustxt" style="font-size: 0.9em; opacity: 0.75;"></div>
         </div>
 
         <!-- Rechte Button-Leiste -->
@@ -41,7 +40,7 @@ class SpaceUnitCard extends HTMLElement {
         <!-- Icon unten links -->
         <div style="grid-column: 1; grid-row: 2; position: relative;">
           <div style="position: absolute; left: -22px; top: 7px; width: 96px; height: 96px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
-            <ha-icon icon="${this.config.icon || 'mdi:home'}" style="--mdc-icon-size: 64px;"></ha-icon>
+            <ha-icon id="bigicon" icon="${this.config.icon || 'mdi:home'}" style="--mdc-icon-size: 64px;"></ha-icon>
             ${this.config.badgeicon ? badge1 : ''}
             ${this.config.badgeicon2 ? badge2 : ''}
           </div>
@@ -94,6 +93,11 @@ class SpaceUnitCard extends HTMLElement {
 
     const title = this.querySelector("div[style*='font-weight: bold']");
     const icon = this.querySelector("ha-icon[icon='" + (this.config.icon || 'mdi:home') + "']");
+    const bigIcon = this.querySelector("ha-icon[icon='" + (this.config.icon || 'mdi:home') + "']");
+    if (bigIcon && this.config.entity) {
+      const entityState = hass.states[this.config.entity]?.state;
+      bigIcon.style.color = entityState === 'on' ? 'yellow' : '';
+    }
 
     if (this.config.tap_action && this.config.tap_action.action === 'navigate') {
       const navigate = () => {
