@@ -20,7 +20,7 @@ class SpaceUnitCard extends HTMLElement {
     badge2 = `<span id="status-badge2" style="position: absolute; top: top: 40px; left: 90px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;"><ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 14px;"></ha-icon></span>`;
     }
     this.innerHTML = `
-      <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative; opacity: 0.9;">
+      <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative; opacity: 0.8;">
         
         <!-- Titel oben links -->
         <div style="grid-column: 1; grid-row: 1; display: flex; flex-direction: column; justify-content: start;">
@@ -87,7 +87,7 @@ class SpaceUnitCard extends HTMLElement {
         setTimeout(() => {
           const newState = hass.states[a.entity]?.state;
           btn.style.color = newState === 'on' ? '#ffea00' : '';
-        }, 500); // Delay to allow state update
+        }, 300); // Delay to allow state update
       });
     });
 
