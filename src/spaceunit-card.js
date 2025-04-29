@@ -15,7 +15,7 @@ class SpaceUnitCard extends HTMLElement {
     if (this.config.badge_icon) {
       const badgeIconTemplate = this.config.badge_icon;
       const renderedBadgeIcon = badgeIconTemplate.replace(/{{\s*states\('([^']+)'\)\s*\|\s*int\s*}}/g, (match, entity) => {
-        const state = hass.states[entity]?.state;
+        const state = hass?.states?.[entity]?.state;
         return state ? parseInt(state, 10) : '';
       });
       badge1 = `<span id="status-badge" style="position: absolute; top: 4px; right: 4px; background: ${this.config.badge_color || '#2196f3'}; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;"><ha-icon icon="${renderedBadgeIcon}" style="--mdc-icon-size: 14px;"></ha-icon></span>`;
