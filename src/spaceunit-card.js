@@ -13,8 +13,9 @@ class SpaceUnitCard extends HTMLElement {
       .join('');
 
 
-    if(this.config.badgeicon) {
-      const badge1 = "<span id=\"status-badge\" style=\"position: absolute; top: 4px; right: 4px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;\"><ha-icon icon=\"${this.config.badgeicon || 'mdi:home'}\" style=\"--mdc-icon-size: 14px;\"></ha-icon></span>";
+    if (this.config.badgeicon) {
+      const badge1 = `<span id="status-badge" style="position: absolute; top: 4px; right: 4px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;"><ha-icon icon="${this.config.badgeicon}" style="--mdc-icon-size: 14px;"></ha-icon></span>`;
+      this.innerHTML += badge1;
     }
     if(this.config.badgeicon2) {
       const badge2 = "<span style=\"position: absolute; top: top: 40px; left: 90px; background:rgb(237, 10, 10); border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;\"><ha-icon icon=\"${this.config.badgeicon2 || 'mdi:home'}\" style=\"--mdc-icon-size: 14px;\"></ha-icon></span>";
