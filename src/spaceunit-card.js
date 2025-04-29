@@ -18,7 +18,7 @@ class SpaceUnitCard extends HTMLElement {
     }
     let badge2 = "";
     if(this.config.badgeicon2) {
-      badge2 = "<span style=\"position: absolute; top: top: 40px; left: 90px; background:rgb(237, 10, 10); border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;\"><ha-icon icon=\"${this.config.badgeicon2 || 'mdi:home'}\" style=\"--mdc-icon-size: 14px;\"></ha-icon></span>";
+    badge2 = `<span id="status-badge2" style="position: absolute; top: top: 40px; left: 90px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;"><ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 14px;"></ha-icon></span>`;
     }
     this.innerHTML = `
       <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative; opacity: 0.7;">
@@ -65,12 +65,28 @@ class SpaceUnitCard extends HTMLElement {
       if (!btn) return;
       btn.addEventListener('click', () => {
         hass.callService(
-          entity_id.split(".")[0], // z.B. "light"
+          a.entity.split(".")[0], // z.B. "light"
           "toggle",
-          { entity_id }
+          { entity_id: a.entity }
         );
       });
     });
+
+    const title = this.querySelector("div[style*='font-weight: bold']");
+    const icon = this.querySelector("ha-icon[icon='" + (this.config.icon || 'mdi:home') + "']");
+
+    if (this.config.tap_action && this.config.tap_action.action === 'navigate') {
+      const navigate = () => {
+        if (this.config.tap_action.navigation_path) {
+          window.history.pushState(null, "", this.config.tap_action.navigation_path);
+          const event = new Event("location-changed", { bubbles: true, composed: true });
+          window.dispatchEvent(event);
+        }
+      };
+
+      if (title) title.addEventListener('click', navigate);
+      if (icon) icon.addEventListener('click', navigate);
+    }
   }
 
 
