@@ -40,7 +40,7 @@ class SpaceUnitCard extends HTMLElement {
 
         <!-- Icon unten links -->
         <div style="grid-column: 1; grid-row: 2; position: relative;">
-          <div style="position: absolute; left: -22px; top: 7px; width: 96px; height: 96px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: gray">
+          <div style="position: absolute; left: -22px; top: 7px; width: 96px; height: 96px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
             <ha-icon icon="${this.config.icon || 'mdi:home'}" style="--mdc-icon-size: 64px;"></ha-icon>
             ${this.config.badgeicon ? badge1 : ''}
             ${this.config.badgeicon2 ? badge2 : ''}
@@ -53,7 +53,8 @@ class SpaceUnitCard extends HTMLElement {
 
   set hass(hass) {
     // this.querySelector('#statustxt').textContent = `${this.config.statustxt}`;
-    var statustxt = hass.states[this.config.entity_statustext]?.state + "" || "";
+    // var statustxt = hass.states[this.config.entity_statustext]?.state + "" || "";    
+    var statustxt = this.config.entity_statustext + "" || "";
     this.querySelector("#statustxt").textContent = statustxt;
 
 
@@ -62,9 +63,9 @@ class SpaceUnitCard extends HTMLElement {
       const btn = this.querySelector(`#btn${i}`);
       if (!btn) return;
 
-      // Set initial color based on entity state
+      // Set initial font color based on entity state
       const entityState = hass.states[a.entity]?.state;
-      btn.style.backgroundColor = entityState === 'on' ? '#eeff00' : '';
+      btn.style.color = entityState === 'on' ? '#ffea00' : '';
 
       // Add click animation
       btn.addEventListener('mousedown', () => {
@@ -85,10 +86,10 @@ class SpaceUnitCard extends HTMLElement {
           { entity_id: a.entity }
         );
 
-        // Update color after toggle
+        // Update font color after toggle
         setTimeout(() => {
           const newState = hass.states[a.entity]?.state;
-          btn.style.backgroundColor = newState === 'on' ? '#eeff00' : '';
+          btn.style.color = newState === 'on' ? '#ffea00' : '';
         }, 500); // Delay to allow state update
       });
     });
