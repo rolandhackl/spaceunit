@@ -12,8 +12,13 @@ class SpaceUnitCard extends HTMLElement {
       .join('');
 
     let badge1 = "";
-    if (this.config.badgeicon) {
-      badge1 = `<span id="status-badge" style="position: absolute; top: 4px; right: 4px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;"><ha-icon icon="${this.config.badgeicon}" style="--mdc-icon-size: 14px;"></ha-icon></span>`;
+    if (this.config.badge_icon) {
+      const badgeIconTemplate = this.config.badge_icon;
+      const renderedBadgeIcon = badgeIconTemplate.replace(/{{\s*states\('([^']+)'\)\s*\|\s*int\s*}}/g, (match, entity) => {
+        const state = hass.states[entity]?.state;
+        return state ? parseInt(state, 10) : '';
+      });
+      badge1 = `<span id="status-badge" style="position: absolute; top: 4px; right: 4px; background: ${this.config.badge_color || '#2196f3'}; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;"><ha-icon icon="${renderedBadgeIcon}" style="--mdc-icon-size: 14px;"></ha-icon></span>`;
     }
     let badge2 = "";
     if(this.config.badgeicon2) {
@@ -27,7 +32,7 @@ class SpaceUnitCard extends HTMLElement {
           <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 4px;">
             ${this.config.title || 'SpaceUnit'}
           </div>
-          <div id="statustxt" style="font-size: 0.9em; opacity: 0.75;"></div>
+          <div id="statustxt" style="font-size: 0.7em; opacity: 0.75;"></div>
         </div>
 
         <!-- Rechte Button-Leiste -->
