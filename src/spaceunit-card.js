@@ -6,7 +6,7 @@ class SpaceUnitCard extends HTMLElement {
     // 👇 Buttons vorab rendern
     const buttons = (this.config.action_entities || [])
       .map((a, i) => `
-        <li style="list-style: none; display: flex; align-items: center; justify-content: center; background:rgb(49, 49, 49); border-radius: 50%; width: 30px; height: 30px; margin: 5px; color: gray;">
+        <li style="list-style: none; display: flex; align-items: center; justify-content: center; background:rgb(49, 49, 49); border-radius: 50%; width: 30px; height: 30px; margin: 5px;">
             <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 24px;"></ha-icon>
         </li>
       `)
@@ -52,9 +52,7 @@ class SpaceUnitCard extends HTMLElement {
   }
 
   set hass(hass) {
-    // this.querySelector('#statustxt').textContent = `${this.config.statustxt}`;
-    // var statustxt = hass.states[this.config.entity_statustext]?.state + "" || "";    
-    var statustxt = this.config.entity_statustext + "" || "";
+    var statustxt = hass.states[this.config.entity_temp]?.state + "°C" || ""; 
     this.querySelector("#statustxt").textContent = statustxt;
 
 
