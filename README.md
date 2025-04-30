@@ -22,6 +22,7 @@ temp_entity: sensor.temperature_livingroom
 
 ## Testconfig
 
+```yaml
 type: custom:spaceunit-card
 title: Büro
 entity_temp: sensor.tempsensor
@@ -37,3 +38,4 @@ action_entities:
     icon: mdi:led-strip-variant
     tap_action:
       action: toggle
+```
