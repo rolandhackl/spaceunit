@@ -1,43 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SpaceUnit Card Test</title>
-  <script type="module" src="spaceunit-card.js"></script>
-</head>
-<body>
-  <h1>SpaceUnit Card Test</h1>
-  <spaceunit-card></spaceunit-card>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/materialdesignicons.css">
+  <title>SpaceUnit Test</title>
+  <script type="module">
+    import './spaceunit-card.js';
 
-  <script>
-    // Simuliere Home Assistant-Daten
-    const mockHass = {
+    const dummyHass = {
       states: {
-        "sensor.temperature": { state: "22.5" },
-        "sensor.humidity": { state: "45" },
-        "sensor.status": { state: "on" }
+        "sensor.0x00124b002a52f49c_temperature": { state: "23.7" },
+        "sensor.0x00124b002a52f49c_humidity": { state: "46.1" },
+        "light.schlafzimmer": { state: "off" },
+        "script.alle_lichter_aus": { state: "idle" }
       },
       callService(domain, service, data) {
-        console.log(`Service aufgerufen: ${domain}.${service}`, data);
+        console.log(`Called service: ${domain}.${service}`, data);
       }
     };
 
-    // Konfiguriere die Karte
-    const card = document.querySelector("spaceunit-card");
-    card.setConfig({
-      title: "Testkarte",
-      icon: "mdi:thermometer",
-      temp_entity: "sensor.temperature",
-      humidity_entity: "sensor.humidity",
-      status_entity: "sensor.status",
-      action_entities: [
-        { entity: "light.living_room", icon: "mdi:lightbulb", tap_action: "toggle" }
-      ]
+    window.addEventListener('DOMContentLoaded', () => {
+      const card = document.createElement('spaceunit-card');
+      card.setConfig({
+        title: "Schlafzimmer",
+        entity_temp: "sensor.0x00124b002a52f49c_temperature",
+        temp_min: 18,
+        temp_max: 25,
+        icon: "mdi:bed-double",
+        status_entity: "sensor.0x00124b002a52f49c_temperature",
+        badge_icon2: "mdi:ab-testing",
+        action_entities: [
+          {
+            entity: "light.schlafzimmer",
+            icon: "mdi:bell",
+            tap_action: { action: "toggle" }
+          },
+          {
+            entity: "script.alle_lichter_aus",
+            icon: "mdi:lightbulb-off",
+            tap_action: "toggle"
+          }
+        ]
+      });
+      card.hass = dummyHass;
+      document.body.appendChild(card);
     });
-
-    // Simuliere Home Assistant-Datenübergabe
-    card.hass = mockHass;
   </script>
-</body>
+</head>
+<body display:flex; justify-content:center; align-items:center; height:100vh;"></body>
 </html>

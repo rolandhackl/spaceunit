@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Wohnzimmer Card</title>
+  <link rel="stylesheet" href="/mdi/materialdesignicons.min.css">
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #1c1c1c;
+      color: #fff;
+      padding: 20px 24px;
+      border-radius: 16px;
+      width: 300px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 10px;
+    }
+
+    .title {
+      font-size: 1.5em;
+      font-weight: bold;
+      grid-column: 1;
+    }
+
+    .temp {
+      font-size: 1em;
+      opacity: 0.8;
+      grid-column: 1;
+    }
+
+    .icon-circle {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 6px 0;
+      transition: background 0.3s, transform 0.2s;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .icon-circle:hover {
+      background: rgba(255,255,255,0.15);
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+
+    .mdi {
+      font-size: 20px;
+    }
+
+    .icon-stack {
+      grid-row: 1 / span 2;
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-icon {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+      width: 96px;
+      height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-icon .mdi {
+      font-size: 48px;
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    }
+
+    .line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(to right, #ffc107, #ff3d00);
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="title">Wohnzimmer</div>
+    <div class="temp">23°C</div>
+
+    <div class="icon-stack">
+      <div class="icon-circle"><i class="mdi mdi-ceiling-light"></i></div>
+      <div class="icon-circle"><i class="mdi mdi-speaker"></i></div>
+      <div class="icon-circle"><i class="mdi mdi-projector-screen-outline"></i></div>
+    </div>
+
+    <div class="main-icon">
+      <i class="mdi mdi-sofa"></i>
+    </div>
+
+    <div class="line"></div>
+  </div>
+
+</body>
+</html>
