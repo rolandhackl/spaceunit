@@ -23,16 +23,16 @@ class SpaceUnitCard extends HTMLElement {
       <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative; opacity: 0.8;">
         
         <!-- Titel oben links -->
-        <div style="grid-column: 1; grid-row: 1; display: flex; flex-direction: column; justify-content: start;">
-          <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 4px;">
+        <div style="grid-column: 1; grid-row: 1; display: flex; flex-direction: column; justify-content: start; margin-right: 0px;">
+          <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 4px; max-width: device-width/3;">
             ${this.config.title || 'SpaceUnit'}
           </div>
           <div id="statustxt" style="font-size: 0.7em; opacity: 0.75;"></div>
         </div>
 
         <!-- Rechte Button-Leiste -->
-        <div style="grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
-          <ul>
+        <div style="grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; justify-content: end; gap: 8px;">
+          <ul style="padding-left:0px;">
             ${buttons}
           </ul>
         </div>
