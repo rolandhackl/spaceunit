@@ -6,7 +6,7 @@ class SpaceUnitCard extends HTMLElement {
     const buttons = (this.config.action_entities || [])
       .map((a, i) => `
         <li style="list-style: none; display: flex; align-items: center; justify-content: center; background:rgb(49, 49, 49); border-radius: 50%; width: 30px; height: 30px; margin: 5px;">
-            <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 24px;"></ha-icon>
+            <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 12px;"></ha-icon>
         </li>
       `)
       .join('');
@@ -64,10 +64,10 @@ class SpaceUnitCard extends HTMLElement {
       const max = this.config.temp_max !== undefined ? parseFloat(this.config.temp_max) : 26;
   
       if (temp >= max) {
-        badge.innerHTML = `<ha-icon icon="mdi:fire"></ha-icon>`;
+        badge.innerHTML = `<ha-icon icon="mdi:fire" style="--mdc-icon-size: 10px;"></ha-icon>`;
         badge.style.background = "red";
       } else if (temp <= min) {
-        badge.innerHTML = `<ha-icon icon="mdi:snowflake"></ha-icon>`;
+        badge.innerHTML = `<ha-icon icon="mdi:snowflake" style="--mdc-icon-size: 10px;"></ha-icon>`;
         badge.style.background = "blue";
       } else {
       }
@@ -112,7 +112,7 @@ class SpaceUnitCard extends HTMLElement {
         bigIcon.setAttribute("icon", entityState === "on" ? iconOn : iconOff);
       }
     }
-    
+
     if (this.config.tap_action?.action === 'navigate') {
       const navigate = () => {
         if (this.config.tap_action.navigation_path) {
