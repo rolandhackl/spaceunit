@@ -5,7 +5,7 @@ class SpaceUnitCard extends HTMLElement {
     // 👇 Buttons vorab rendern
     const buttons = (this.config.action_entities || [])
       .map((a, i) => `
-        <li style="list-style: none; align-items: center; justify-content: center; background:rgb(49, 49, 49); border-radius: 50%; width: 30px; height: 30px; margin-left: 5px;">
+        <li style="list-style: none; align-items: center; background:rgb(49, 49, 49); border-radius: 50%; width: 30px; height: 30px; margin: 5px;">
             <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 18px;"></ha-icon>
         </li>
       `)
@@ -20,26 +20,7 @@ class SpaceUnitCard extends HTMLElement {
     badge2 = `<span id="status-badge2" style="position: absolute; top: 40px; left: 90px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 14px;"><ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 16px;"></ha-icon></span>`;
     }
     this.innerHTML = `
-      <style>
-        @keyframes wobble {
-          0%   { transform: rotate(0deg); }
-          25%  { transform: rotate(-5deg); }
-          50%  { transform: rotate(5deg); }
-          75%  { transform: rotate(-5deg); }
-          100% { transform: rotate(0deg); }
-        }
-
-        .wobble {
-          animation: wobble 0.5s ease-in-out;
-        }
-
-        .glow {
-          box-shadow: 0 0 8px 4px rgba(255, 215, 0, 0.6);
-          border-radius: 50%;
-          transition: box-shadow 0.3s ease-in-out;
-        }
-      </style>
-
+      
       <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative; opacity: 0.8;">
         
         <!-- Titel oben links -->
