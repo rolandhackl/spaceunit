@@ -113,7 +113,7 @@ class SpaceUnitCard extends HTMLElement {
       });
     });
   
-    const title = this.querySelector(`"title_id_${this.config.title || 'SpaceUnit'}"`);
+    const title = this.querySelector("div[style*='font-weight: bold']");
     const icon = this.querySelector("ha-icon[icon='" + (this.config.icon || 'mdi:home') + "']");
     const bigIcon = this.querySelector("ha-icon[icon='" + (this.config.icon || 'mdi:home') + "']");
     if (bigIcon && this.config.entity) {
