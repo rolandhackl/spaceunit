@@ -6,7 +6,7 @@ class SpaceUnitCard extends HTMLElement {
     const buttons = (this.config.action_entities || [])
       .map((a, i) => `
         <li style="list-style: none; align-items: center; background:rgb(49, 49, 49); display: flex; border-radius: 50%; width: 30px; height: 30px; margin: 5px;">
-            <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 18px;"></ha-icon>
+            <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 18px; margin-left: 5px;"></ha-icon>
         </li>
       `)
       .join('');
@@ -20,9 +20,7 @@ class SpaceUnitCard extends HTMLElement {
     badge2 = `<span id="status-badge2" style="position: absolute; top: 40px; left: 90px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 14px;"><ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 16px;"></ha-icon></span>`;
     }
     this.innerHTML = `
-      
       <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative; opacity: 0.8;">
-        
         <!-- Titel oben links -->
         <div style="grid-column: 1; grid-row: 1; display: flex; flex-direction: column; justify-content: start; margin-right: 0px;">
           <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 4px; max-width: max-width: 30%;">
@@ -127,11 +125,13 @@ class SpaceUnitCard extends HTMLElement {
             setTimeout(() => {
               title.classList.remove("wobble");
               title.parentElement.classList.remove("glow");
+            }, 300);
 
+            setTimeout(() => {
               // 🕒 Navigation erst jetzt!
               window.history.pushState(null, "", navPath);
               window.dispatchEvent(new Event("location-changed", { bubbles: true, composed: true }));
-            }, 300);
+            }, 400);
           }
         });
         title.hasNavigateHandler = true;
@@ -148,11 +148,13 @@ class SpaceUnitCard extends HTMLElement {
             setTimeout(() => {
               icon.classList.remove("wobble");
               icon.parentElement.classList.remove("glow");
+            }, 300);
 
+            setTimeout(() => {
               // 🕒 Navigation erst jetzt!
               window.history.pushState(null, "", navPath);
               window.dispatchEvent(new Event("location-changed", { bubbles: true, composed: true }));
-            }, 300);
+            }, 400);
           }
         });
         icon.hasNavigateHandler = true;
