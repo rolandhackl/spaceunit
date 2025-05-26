@@ -5,7 +5,7 @@ class SpaceUnitCard extends HTMLElement {
     // 👇 Buttons vorab rendern
     const buttons = (this.config.action_entities || [])
       .map((a, i) => `
-        <li style="list-style: none; align-items: center; background:rgb(49, 49, 49); border-radius: 50%; width: 30px; height: 30px; margin: 5px;">
+        <li style="list-style: none; align-items: center; background:rgb(49, 49, 49); display: flex; border-radius: 50%; width: 30px; height: 30px; margin: 5px;">
             <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 18px;"></ha-icon>
         </li>
       `)
