@@ -20,10 +20,29 @@ class SpaceUnitCard extends HTMLElement {
     badge2 = `<span id="status-badge2" style="position: absolute; top: 40px; left: 90px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 14px;"><ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 16px;"></ha-icon></span>`;
     }
     this.innerHTML = `
+      <style>
+        @keyframes wobble {
+          0%   { transform: rotate(0deg); }
+          25%  { transform: rotate(-5deg); }
+          50%  { transform: rotate(5deg); }
+          75%  { transform: rotate(-5deg); }
+          100% { transform: rotate(0deg); }
+        }
+
+        .wobble {
+          animation: wobble 0.5s ease-in-out;
+        }
+
+        .glow {
+          box-shadow: 0 0 8px 4px rgba(255, 215, 0, 0.6);
+          border-radius: 50%;
+          transition: box-shadow 0.3s ease-in-out;
+        }
+      </style>
       <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative; opacity: 0.8;">
         <!-- Titel oben links -->
         <div style="grid-column: 1; grid-row: 1; display: flex; flex-direction: column; justify-content: start; margin-right: 0px;">
-          <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 4px; max-width: max-width: 30%;">
+          <div id="title_id_${this.config.title || 'SpaceUnit'}" style="font-weight: bold; font-size: 1.2em; margin-bottom: 4px; max-width: 30%;">
             ${this.config.title || 'SpaceUnit'}
           </div>
           <div id="statustxt" style="font-size: 0.7em; opacity: 0.75;"></div>
@@ -94,7 +113,7 @@ class SpaceUnitCard extends HTMLElement {
       });
     });
   
-    const title = this.querySelector("div[style*='font-weight: bold']");
+    const title = this.querySelector(`"title_id_${this.config.title || 'SpaceUnit'}"`);
     const icon = this.querySelector("ha-icon[icon='" + (this.config.icon || 'mdi:home') + "']");
     const bigIcon = this.querySelector("ha-icon[icon='" + (this.config.icon || 'mdi:home') + "']");
     if (bigIcon && this.config.entity) {
@@ -114,11 +133,33 @@ class SpaceUnitCard extends HTMLElement {
 
     if (this.config.tap_action?.action === 'navigate') {
 
-      if (!title.hasNavigateHandler) {
+      // if (!title.hasNavigateHandler) {
+      //   title.addEventListener("click", () => {
+      //     const navPath = this.config.tap_action?.navigation_path;
+      //     if (navPath) {
+      //       // 🔥 Animation triggern
+      //       title.classList.add("wobble");
+      //       title.parentElement.classList.add("glow");
+
+      //       setTimeout(() => {
+      //         title.classList.remove("wobble");
+      //         title.parentElement.classList.remove("glow");
+      //       }, 300);
+
+      //       setTimeout(() => {
+      //         // 🕒 Navigation erst jetzt!
+      //         window.history.pushState(null, "", navPath);
+      //         window.dispatchEvent(new Event("location-changed", { bubbles: true, composed: true }));
+      //       }, 400);
+      //     }
+      //   });
+      //   title.hasNavigateHandler = true;
+      // }
+
+      if (!this._titleHasNavigateHandler) {
         title.addEventListener("click", () => {
           const navPath = this.config.tap_action?.navigation_path;
           if (navPath) {
-            // 🔥 Animation triggern
             title.classList.add("wobble");
             title.parentElement.classList.add("glow");
 
@@ -128,20 +169,18 @@ class SpaceUnitCard extends HTMLElement {
             }, 300);
 
             setTimeout(() => {
-              // 🕒 Navigation erst jetzt!
               window.history.pushState(null, "", navPath);
               window.dispatchEvent(new Event("location-changed", { bubbles: true, composed: true }));
             }, 400);
           }
         });
-        title.hasNavigateHandler = true;
+        this._titleHasNavigateHandler = true;
       }
 
-      if (!icon.hasNavigateHandler) {
+      if (!this._titleHasNavigateHandler) {
         icon.addEventListener("click", () => {
           const navPath = this.config.tap_action?.navigation_path;
           if (navPath) {
-            // 🔥 Animation triggern
             icon.classList.add("wobble");
             icon.parentElement.classList.add("glow");
 
@@ -151,14 +190,36 @@ class SpaceUnitCard extends HTMLElement {
             }, 300);
 
             setTimeout(() => {
-              // 🕒 Navigation erst jetzt!
               window.history.pushState(null, "", navPath);
               window.dispatchEvent(new Event("location-changed", { bubbles: true, composed: true }));
             }, 400);
           }
         });
-        icon.hasNavigateHandler = true;
+        this._titleHasNavigateHandler = true;
       }
+
+      // if (!icon.hasNavigateHandler) {
+      //   icon.addEventListener("click", () => {
+      //     const navPath = this.config.tap_action?.navigation_path;
+      //     if (navPath) {
+      //       // 🔥 Animation triggern
+      //       icon.classList.add("wobble");
+      //       icon.parentElement.classList.add("glow");
+
+      //       setTimeout(() => {
+      //         icon.classList.remove("wobble");
+      //         icon.parentElement.classList.remove("glow");
+      //       }, 300);
+
+      //       setTimeout(() => {
+      //         // 🕒 Navigation erst jetzt!
+      //         window.history.pushState(null, "", navPath);
+      //         window.dispatchEvent(new Event("location-changed", { bubbles: true, composed: true }));
+      //       }, 400);
+      //     }
+      //   });
+      //   icon.hasNavigateHandler = true;
+      // }
 
     }
   }
