@@ -34,7 +34,7 @@ class SpaceUnitCard extends HTMLElement {
         }
 
         .glow {
-          box-shadow: 0 0 8px 4px rgba(255, 215, 0, 0.6);
+          box-shadow: 0 0 8px 4px #2196f3;
           border-radius: 50%;
           transition: box-shadow 0.3s ease-in-out;
         }
@@ -177,7 +177,7 @@ class SpaceUnitCard extends HTMLElement {
         this._titleHasNavigateHandler = true;
       }
 
-      if (!this._titleHasNavigateHandler) {
+      if (!this._iconHasNavigateHandler) {
         icon.addEventListener("click", () => {
           const navPath = this.config.tap_action?.navigation_path;
           if (navPath) {
@@ -195,7 +195,7 @@ class SpaceUnitCard extends HTMLElement {
             }, 400);
           }
         });
-        this._titleHasNavigateHandler = true;
+        this._iconHasNavigateHandler = true;
       }
 
       // if (!icon.hasNavigateHandler) {
