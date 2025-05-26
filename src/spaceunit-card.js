@@ -6,7 +6,7 @@ class SpaceUnitCard extends HTMLElement {
     const buttons = (this.config.action_entities || [])
       .map((a, i) => `
         <li style="list-style: none; align-items: center; background:rgb(49, 49, 49); border-radius: 50%; width: 35px; height: 35px; margin: 7px;">
-            <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 20px; margin: 7px;"></ha-icon>
+            <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 22px; margin: 7px;"></ha-icon>
         </li>
       `)
       .join('');
@@ -49,7 +49,7 @@ class SpaceUnitCard extends HTMLElement {
         </div>
 
         <!-- Rechte Button-Leiste -->
-        <div style="grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; justify-content: end; gap: 8px; margin-top: -22px;">
+        <div style="grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
           <ul style="padding-left:0px;">
             ${buttons}
           </ul>
