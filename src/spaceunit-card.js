@@ -13,11 +13,11 @@ class SpaceUnitCard extends HTMLElement {
 
     let badge1 = "";
     if (this.config.entity_temp) {
-      badge1 = `<span id="status-badge" style="position: absolute; top: 4px; right: 4px; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;"></span>`;
+      badge1 = `<span id="status-badge" style="position: absolute; top: 4px; right: 4px; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 14px;"></span>`;
     }
     let badge2 = "";
     if(this.config.badge_icon2) {
-    badge2 = `<span id="status-badge2" style="position: absolute; top: top: 40px; left: 90px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;"><ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 14px;"></ha-icon></span>`;
+    badge2 = `<span id="status-badge2" style="position: absolute; top: top: 40px; left: 90px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 14px;"><ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 14px;"></ha-icon></span>`;
     }
     this.innerHTML = `
       <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative; opacity: 0.8;">
@@ -65,10 +65,10 @@ class SpaceUnitCard extends HTMLElement {
   
       if (temp >= max) {
         badge.innerHTML = `<ha-icon icon="mdi:fire" style="--mdc-icon-size: 14px;"></ha-icon>`;
-        badge.style.background = "orange";
+        badge.style.background = "#ef5532";
       } else if (temp <= min) {
         badge.innerHTML = `<ha-icon icon="mdi:snowflake" style="--mdc-icon-size: 14px;"></ha-icon>`;
-        badge.style.background = "lightblue";
+        badge.style.background = "#2196f3";
       } else {
       }
     }
@@ -114,24 +114,50 @@ class SpaceUnitCard extends HTMLElement {
     }
 
     if (this.config.tap_action?.action === 'navigate') {
-      const navigate = () => {
-        if (this.config.tap_action.navigation_path) {
-          window.history.pushState(null, "", this.config.tap_action.navigation_path);
-          const event = new Event("location-changed", { bubbles: true, composed: true });
-          window.dispatchEvent(event);
-        }
-      };
+      // const navigate = () => {
+      //   if (this.config.tap_action.navigation_path) {
+      //     window.history.pushState(null, "", this.config.tap_action.navigation_path);
+      //     const event = new Event("location-changed", { bubbles: true, composed: true });
+      //     window.dispatchEvent(event);
+      //   }
+      // };
   
-      if (title) title.addEventListener('click', navigate);
-      if (icon) icon.addEventListener('click', navigate);
+      // if (title) title.addEventListener('click', navigate);
+      // if (icon) icon.addEventListener('click', navigate);
+
+      if (title) {
+        title.addEventListener("click", () => {
+          if (this.config.tap_action.navigation_path) {
+            fireEvent(this, "navigate", { path: this.config.tap_action.navigation_path });
+          }
+        });
+      }
+
+      if (icon) {
+        icon.addEventListener("click", () => {
+          if (this.config.tap_action.navigation_path) {
+            fireEvent(this, "navigate", { path: this.config.tap_action.navigation_path });
+          }
+        });
+      }
     }
   }
   
 
-
   getCardSize() {
     return 2;
   }
+}
+
+function fireEvent(node, type, detail, options = {}) {
+  const event = new Event(type, {
+    bubbles: options.bubbles !== false,
+    cancelable: !!options.cancelable,
+    composed: options.composed !== false,
+  });
+  event.detail = detail ?? {};
+  node.dispatchEvent(event);
+  return event;
 }
 
 customElements.define("spaceunit-card", SpaceUnitCard);

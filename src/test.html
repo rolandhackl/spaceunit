@@ -9,7 +9,7 @@
 
     const dummyHass = {
       states: {
-        "sensor.0x00124b002a52f49c_temperature": { state: "23.7" },
+        "sensor.0x00124b002a52f49c_temperature": { state: "15.7" },
         "sensor.0x00124b002a52f49c_humidity": { state: "46.1" },
         "light.schlafzimmer": { state: "off" },
         "script.alle_lichter_aus": { state: "idle" }
@@ -27,7 +27,7 @@
         temp_min: 18,
         temp_max: 25,
         icon: "mdi:bed-double",
-        status_entity: "sensor.0x00124b002a52f49c_temperature",
+        entity: "sensor.0x00124b002a52f49c_temperature",
         badge_icon2: "mdi:ab-testing",
         action_entities: [
           {
@@ -39,6 +39,11 @@
             entity: "script.alle_lichter_aus",
             icon: "mdi:lightbulb-off",
             tap_action: "toggle"
+          },
+          {
+            entity: "switch.schlafzimmer",
+            icon: "mdi:lightbulb",
+            tap_action: "toggle"
           }
         ]
       });
@@ -47,5 +52,5 @@
     });
   </script>
 </head>
-<body display:flex; justify-content:center; align-items:center; height:100vh;"></body>
+<body style="display:flex; justify-content:center; align-items:center; height:100vh;"></body>
 </html>
