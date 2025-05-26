@@ -5,7 +5,7 @@ class SpaceUnitCard extends HTMLElement {
     // 👇 Buttons vorab rendern
     const buttons = (this.config.action_entities || [])
       .map((a, i) => `
-        <li style="list-style: none; display: flex; align-items: center; justify-content: center; background:rgb(49, 49, 49); border-radius: 50%; width: 40px; height: 40px; margin: 5px;">
+        <li style="list-style: none; align-items: center; justify-content: center; background:rgb(49, 49, 49); border-radius: 50%; width: 30px; height: 30px; margin-left: 5px;">
             <ha-icon  id="btn${i}" icon="${a.icon || 'mdi:help'}" style="--mdc-icon-size: 18px;"></ha-icon>
         </li>
       `)
@@ -17,7 +17,7 @@ class SpaceUnitCard extends HTMLElement {
     }
     let badge2 = "";
     if(this.config.badge_icon2) {
-    badge2 = `<span id="status-badge2" style="position: absolute; top: top: 40px; left: 90px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 14px;"><ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 16px;"></ha-icon></span>`;
+    badge2 = `<span id="status-badge2" style="position: absolute; top: 40px; left: 90px; background: #2196f3; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 14px;"><ha-icon icon="${this.config.badgeicon2 || 'mdi:home'}" style="--mdc-icon-size: 16px;"></ha-icon></span>`;
     }
     this.innerHTML = `
       <style>
@@ -44,7 +44,7 @@ class SpaceUnitCard extends HTMLElement {
         
         <!-- Titel oben links -->
         <div style="grid-column: 1; grid-row: 1; display: flex; flex-direction: column; justify-content: start; margin-right: 0px;">
-          <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 4px; max-width: device-width/3;">
+          <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 4px; max-width: max-width: 30%;">
             ${this.config.title || 'SpaceUnit'}
           </div>
           <div id="statustxt" style="font-size: 0.7em; opacity: 0.75;"></div>
@@ -140,19 +140,17 @@ class SpaceUnitCard extends HTMLElement {
           const navPath = this.config.tap_action?.navigation_path;
           if (navPath) {
             // 🔥 Animation triggern
-            icon.classList.add("wobble");
-            icon.parentElement.classList.add("glow");
+            title.classList.add("wobble");
+            title.parentElement.classList.add("glow");
 
-            // Entferne Klassen nach der Animation (clean)
             setTimeout(() => {
-              icon.classList.remove("wobble");
-              icon.parentElement.classList.remove("glow");
-            }, 600);
+              title.classList.remove("wobble");
+              title.parentElement.classList.remove("glow");
 
-            // 🔁 Navigation ausführen
-            console.log("Navigating to:", navPath);
-            window.history.pushState(null, "", navPath);
-            window.dispatchEvent(new Event("location-changed", { bubbles: true, composed: true }));
+              // 🕒 Navigation erst jetzt!
+              window.history.pushState(null, "", navPath);
+              window.dispatchEvent(new Event("location-changed", { bubbles: true, composed: true }));
+            }, 300);
           }
         });
         title.hasNavigateHandler = true;
@@ -162,9 +160,18 @@ class SpaceUnitCard extends HTMLElement {
         icon.addEventListener("click", () => {
           const navPath = this.config.tap_action?.navigation_path;
           if (navPath) {
-            console.log("Navigating to:", navPath);
-            window.history.pushState(null, "", navPath);
-            window.dispatchEvent(new Event("location-changed", { bubbles: true, composed: true }));
+            // 🔥 Animation triggern
+            icon.classList.add("wobble");
+            icon.parentElement.classList.add("glow");
+
+            setTimeout(() => {
+              icon.classList.remove("wobble");
+              icon.parentElement.classList.remove("glow");
+
+              // 🕒 Navigation erst jetzt!
+              window.history.pushState(null, "", navPath);
+              window.dispatchEvent(new Event("location-changed", { bubbles: true, composed: true }));
+            }, 300);
           }
         });
         icon.hasNavigateHandler = true;
