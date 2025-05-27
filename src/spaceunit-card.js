@@ -227,11 +227,11 @@ class SpaceUnitCard extends HTMLElement {
     }
     if (hass.states[this.config.entity]?.state === "on") {
       const entityState = hass.states[this.config.entity]?.state;
-      icon.classList.add("wobble");
-      icon.style.color = "yellow";
-      setTimeout(() => {
-        icon.classList.remove("wobble");
-      }, 300);
+
+      const card = this.querySelector('ha-card');
+      // card.style.color = "yellow";
+      card.style.backgroundColor = "#746d0d";
+    
 
     }
   }
