@@ -230,9 +230,13 @@ class SpaceUnitCard extends HTMLElement {
 
       const card = this.querySelector('ha-card');
       // card.style.color = "yellow";
-      card.style.backgroundColor = "#746d0d";
+      card.style.backgroundColor =  "#322f00";
     
 
+    } else {
+      const card = this.querySelector('ha-card');
+      // card.style.color = "";
+      card.style.backgroundColor = "#282828";
     }
   }
   
