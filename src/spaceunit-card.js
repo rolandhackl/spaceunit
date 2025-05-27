@@ -38,6 +38,11 @@ class SpaceUnitCard extends HTMLElement {
           border-radius: 50%;
           transition: box-shadow 0.3s ease-in-out;
         }
+
+        .card-hover:hover {
+          transform: scale(1.02);
+          transition: transform 0.3s ease-in-out;
+        }
       </style>
       <ha-card style="overflow: hidden; padding: 12px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; height: 140px; position: relative; opacity: 0.8;">
         <!-- Titel oben links -->
@@ -161,11 +166,9 @@ class SpaceUnitCard extends HTMLElement {
           const navPath = this.config.tap_action?.navigation_path;
           if (navPath) {
             title.classList.add("wobble");
-            title.parentElement.classList.add("glow");
 
             setTimeout(() => {
               title.classList.remove("wobble");
-              title.parentElement.classList.remove("glow");
             }, 300);
 
             setTimeout(() => {
@@ -220,6 +223,15 @@ class SpaceUnitCard extends HTMLElement {
       //   });
       //   icon.hasNavigateHandler = true;
       // }
+
+    }
+    if (hass.states[this.config.entity]?.state === "on") {
+      const entityState = hass.states[this.config.entity]?.state;
+      icon.classList.add("wobble");
+      icon.style.color = "yellow";
+      setTimeout(() => {
+        icon.classList.remove("wobble");
+      }, 300);
 
     }
   }
