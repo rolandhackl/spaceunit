@@ -11,6 +11,8 @@ title: Wohnzimmer
 icon: mdi:sofa
 entity: light.wohnzimmerlicht_gr
 entity_temp: sensor.0x00124b002a53a551_temperature
+temp_min: 18
+temp_max: 23
 tap_action:
   action: navigate
   navigation_path: /mobile-great-hall
@@ -23,9 +25,14 @@ action_entities:
     icon: mdi:speaker-wireless
   - entity: media_player.denon_avr_x1800h_2
     icon: mdi:audio-video
+
 ```
 
+## Screenshots
+
 ![alt text](68361c39ebaf1d000000066c.png)
+
+![alt text](image.png)
 
 ## 🛠️ Installation (HACS)
 
