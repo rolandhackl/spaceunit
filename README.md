@@ -7,21 +7,25 @@
 
 ```yaml
 type: custom:spaceunit-card
-title: Büro
-entity_temp: sensor.tempsensor
-icon: mdi:monitor
-entity: light.buro
-status_entity: light.buro
+title: Wohnzimmer
+icon: mdi:sofa
+entity: light.wohnzimmerlicht_gr
+entity_temp: sensor.0x00124b002a53a551_temperature
+tap_action:
+  action: navigate
+  navigation_path: /mobile-great-hall
 action_entities:
-  - entity: light.buro
-    icon: mdi:lightbulb
+  - entity: light.wohnzimmerlicht_gr
+    icon: mdi:lightbulb-group
     tap_action:
       action: toggle
-  - entity: light.server_led
-    icon: mdi:led-strip-variant
-    tap_action:
-      action: toggle
+  - entity: switch.wohnzimmer_audio_plug
+    icon: mdi:speaker-wireless
+  - entity: media_player.denon_avr_x1800h_2
+    icon: mdi:audio-video
 ```
+
+![alt text](68361c39ebaf1d000000066c.png)
 
 ## 🛠️ Installation (HACS)
 
